@@ -1,10 +1,9 @@
 defmodule PropertyApp.PropertyRepoTest do 
   use ExUnit.Case, async: true
-  import Tirexs.HTTP
   import PropertyApp.JsonSchemaTestHelper
   alias PropertyApp.PropertyRepo
   setup do
-  	delete("property_test") && :ok
+  	PropertyRepo.delete_all && :ok
   end
 
   test "doesn't allow create wrong property" do 
