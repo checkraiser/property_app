@@ -6,6 +6,7 @@ To start your Phoenix app:
   * Install Node.js dependencies with `npm install`
   * Install ElasticSearch
   * Start Phoenix endpoint with `mix phoenix.server`
+  * Running Test with `mix test`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
