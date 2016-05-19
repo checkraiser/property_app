@@ -25,7 +25,7 @@ defmodule PropertyApp.PropertiesController do
   end
 
   defp errors_to_json(errors) do
-    errors |> Enum.map(fn ({msg, _cols}) -> msg end)
+    errors |> Enum.map(fn ({msg, _cols}) -> %{col: _cols, msg: msg} end)
   end
 
   defp convert_params(property_params) do 

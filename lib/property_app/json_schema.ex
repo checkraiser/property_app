@@ -63,6 +63,6 @@ defmodule PropertyApp.JsonSchema do
   end
 
   def errors_to_json(errors) do
-    errors |> Enum.map(fn ({msg, _cols}) -> msg end)
+    errors |> Enum.map(fn ({msg, _cols}) -> _cols <> ":" <> msg end)
   end
 end

@@ -22,7 +22,7 @@ import "phoenix_html"
 var ErrorList = React.createClass({
 	render: function(){
 		var errors = this.props.errors.map(function(error, index){
-			return <li key={"error-" + index}>{error.toString()}</li>
+			return <li key={"error-" + index}>{error.col}: {error.msg.toString()}</li>
 		})
 		return (
 			<ul>{errors}</ul>
