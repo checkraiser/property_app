@@ -25,7 +25,9 @@ var ErrorList = React.createClass({
 			return <li key={"error-" + index}>{error.col}: {error.msg.toString()}</li>
 		})
 		return (
+		<div><h1>Errors</h1>
 			<ul>{errors}</ul>
+		</div>
 		)
 	}
 })
