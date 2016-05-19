@@ -4,7 +4,7 @@ To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
   * Install Node.js dependencies with `npm install`
-  * Install ElasticSearch
+  * Install ElasticSearch (with delete-by-query plugin)
   * Start Phoenix endpoint with `mix phoenix.server`
   * Running Test with `mix test`
 
