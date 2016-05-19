@@ -17,7 +17,16 @@ defmodule PropertyApp.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    
   end
+
+  scope "/api/v1", PropertyApp do 
+    pipe_through :api
+    resources "/properties", PropertiesController
+  end
+
+
 
   # Other scopes may use custom stacks.
   # scope "/api", PropertyApp do
