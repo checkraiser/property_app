@@ -35,7 +35,8 @@ defmodule PropertyApp.Mixfile do
      {:cowboy, "~> 1.0"},
      {:tirexs, "~> 0.8.0"},
      {:ex_json_schema, "~> 0.4.0"},
-     {:poison, "~> 2.0"}
+     {:poison, "~> 2.0"},
+     {:phoenix_haml, github: "chrismccord/phoenix_haml"}
    ]
   end
 end
