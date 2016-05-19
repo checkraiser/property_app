@@ -1,9 +1,7 @@
 defmodule PropertyApp.PropertiesControllerTest do
   use PropertyApp.ConnCase
-  import PropertyApp.JsonSchemaTestHelper
   alias PropertyApp.PropertyRepo
-  @attributes ~W(bathrooms)
-  @valid_attrs correct_property_params
+  @valid_attrs %{bathrooms: "50", bedrooms: "50", description: "test description", serviced: "true", lat: "10.1", lon: "100", kind: "room"}
   setup %{conn: conn} do
   	PropertyRepo.delete_all && :ok
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -13,7 +11,7 @@ defmodule PropertyApp.PropertiesControllerTest do
   	conn = post conn, properties_path(conn, :create), property: @valid_attrs
   	assert conn.status == 201
   	property = conn.assigns[:property] 
-  	assert property[:bathrooms] == @valid_attrs[:bathrooms]
+  	assert property[:bathrooms] |> to_string == @valid_attrs[:bathrooms]
   end
   test "index" do
   	conn = post conn, properties_path(conn, :create), property: @valid_attrs

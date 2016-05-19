@@ -19,3 +19,159 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+var ErrorList = React.createClass({
+	render: function(){
+		var errors = this.props.errors.map(function(error, index){
+			return <li key={"error-" + index}>{error.toString()}</li>
+		})
+		return (
+			<ul>{errors}</ul>
+		)
+	}
+})
+var PropertiesList = React.createClass({
+  render: function() {
+    var propertyNodes = this.props.properties.map(function(property) {
+      return (
+        <li key={property.id}>{property.bathrooms}, {property.bedrooms}, {property.description}, {property.kind}, {property.lat}, {property.lon}, {property.serviced.toString()}</li>
+      );
+    });
+    return (
+      <ul>
+        {propertyNodes}
+      </ul>
+    );
+  }
+});
+
+var PropertyForm = React.createClass({
+  getInitialState: function() {
+    return {bathrooms: '', bedrooms: '', description: '', kind: '', lat: '', lon: '', serviced: ''};
+  },
+  handleBathroomsChange: function(e) {
+    this.setState({bathrooms: parseInt(e.target.value)});
+  },
+  handleBedroomsChange: function(e) {
+    this.setState({bedrooms: parseInt(e.target.value)});
+  },
+  handleDescriptionChange: function(e) {
+    this.setState({description: e.target.value});
+  },
+  handleKindChange: function(e) {
+    this.setState({kind: e.target.value});
+  },
+  handleLatChange: function(e) {
+    this.setState({lat: parseFloat(e.target.value)});
+  },
+  handleLonChange: function(e) {
+    this.setState({lon: parseFloat(e.target.value)});
+  },
+  handleServicedChange: function(e) {
+    this.setState({serviced: Boolean(e.target.value)});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    this.props.onPropertySubmit(this.state);
+    //this.setState({property: this.state});
+  },
+  render: function() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          placeholder="Bathrooms"
+          value={this.state.bathrooms}
+          onChange={this.handleBathroomsChange}
+        />
+        <input
+          type="text"
+          placeholder="Bedrooms"
+          value={this.state.bedrooms}
+          onChange={this.handleBedroomsChange}
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={this.state.description}
+          onChange={this.handleDescriptionChange}
+        />
+        <input
+          type="text"
+          placeholder="Kind"
+          value={this.state.kind}
+          onChange={this.handleKindChange}
+        />
+        <input
+          type="text"
+          placeholder="Lat"
+          value={this.state.lat}
+          onChange={this.handleLatChange}
+        />
+        <input
+          type="text"
+          placeholder="Lon"
+          value={this.state.lon}
+          onChange={this.handleLonChange}
+        />
+        <input
+          type="text"
+          placeholder="Serviced"
+          value={this.state.serviced}
+          onChange={this.handleServicedChange}
+        />
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
+});
+var PropertiesBox = React.createClass({
+  getInitialState: function(){
+  	return {
+  		properties: [],
+  		errors: []
+  	}
+  },
+  componentDidMount: function(){
+  	$.ajax({
+      url: "/api/v1/properties",
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({properties: data.properties});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(err);
+      }.bind(this)
+    });
+  },
+  handlePropertySubmit: function(property){
+  	$.ajax({
+      url: "/api/v1/properties",
+      dataType: 'json',
+      type: 'POST',
+      data: {property: property},
+      success: function(data) {
+      	var properties = this.state.properties.push(data.property);
+        this.setState({properties: properties, errors: []});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        var error = JSON.parse(xhr.responseText)
+        this.setState({errors: error.error});
+      }.bind(this)
+    });
+  },
+  render: function() {
+    return (
+      <div>
+      	<ErrorList errors={this.state.errors} />
+        <PropertiesList properties={this.state.properties} />
+        <PropertyForm onPropertySubmit={this.handlePropertySubmit}/>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <PropertiesBox />,
+  document.getElementById('content')
+);
