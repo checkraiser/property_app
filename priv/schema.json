@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Property API Schema",
+  "definitions": {
+  	"property": {
+  		"type": "object",
+  		"required": ["bathrooms", "bedrooms", "lat", "lon", "kind"],
+  		"properties": {
+  			"bathrooms": {
+  				"type": "integer",
+  				"minimum": 0,
+  				"maximum": 100
+  			},
+  			"bedrooms": {
+  				"type": "integer",
+  				"minimum": 0,
+  				"maximum": 100	
+  			},
+  			"description": {
+  				"type": "string"
+  			},
+  			"serviced": {
+  				"enum": [true, false]
+  			},
+  			"lat": {
+				"type": "number",
+				"minimum": -90,
+				"maximum": 90
+  			},
+  			"lon": {
+  				"type": "number",
+  				"minimum": -180,
+  				"maximum": 180
+  			},
+  			"kind": {
+  				"enum": ["room", "house", "apartment"]
+  			}
+  		}
+  	}
+  }
+}
