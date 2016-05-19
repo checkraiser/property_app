@@ -17,7 +17,7 @@ defmodule PropertyApp.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {PropertyApp, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext, :tirexs]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,10 +33,10 @@ defmodule PropertyApp.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:tirexs, "~> 0.8.0"},
      {:ex_json_schema, "~> 0.4.0"},
      {:poison, "~> 2.0"},
-     {:phoenix_haml, github: "chrismccord/phoenix_haml"}
+     {:phoenix_haml, github: "chrismccord/phoenix_haml"},
+     {:tirexs, "~> 0.8.0"}
    ]
   end
 end
