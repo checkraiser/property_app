@@ -49,10 +49,10 @@ var PropertyForm = React.createClass({
     return {bathrooms: '', bedrooms: '', description: '', kind: '', lat: '', lon: '', serviced: ''};
   },
   handleBathroomsChange: function(e) {
-    this.setState({bathrooms: parseInt(e.target.value)});
+    this.setState({bathrooms: e.target.value});
   },
   handleBedroomsChange: function(e) {
-    this.setState({bedrooms: parseInt(e.target.value)});
+    this.setState({bedrooms: e.target.value});
   },
   handleDescriptionChange: function(e) {
     this.setState({description: e.target.value});
@@ -61,13 +61,13 @@ var PropertyForm = React.createClass({
     this.setState({kind: e.target.value});
   },
   handleLatChange: function(e) {
-    this.setState({lat: parseFloat(e.target.value)});
+    this.setState({lat: e.target.value});
   },
   handleLonChange: function(e) {
-    this.setState({lon: parseFloat(e.target.value)});
+    this.setState({lon: e.target.value});
   },
   handleServicedChange: function(e) {
-    this.setState({serviced: Boolean(e.target.value)});
+    this.setState({serviced: e.target.value});
   },
   handleSubmit: function(e) {
     e.preventDefault();
